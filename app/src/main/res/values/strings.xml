@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Composition</string>
+    <string name="composition">Состав числа</string>
+    <string name="play">Играть</string>
+    <string name="testLevel">Тестовый</string>
+    <string name="easyLevel">Легкий</string>
+    <string name="normalLevel">Нормальный</string>
+    <string name="hardLevel">Тяжелый</string>
 </resources>
