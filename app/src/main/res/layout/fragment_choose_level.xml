@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:text="@string/testLevel"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/easyLevel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/easyLevel"
@@ -21,6 +23,7 @@
         android:layout_margin="4dp"
         android:backgroundTint="@android:color/holo_green_light"
         android:text="@string/easyLevel"
+        app:layout_constraintBottom_toTopOf="@id/normalLevel"
         app:layout_constraintTop_toBottomOf="@id/testLevel" />
 
     <com.google.android.material.button.MaterialButton
@@ -30,6 +33,7 @@
         android:layout_margin="4dp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:text="@string/normalLevel"
+        app:layout_constraintBottom_toTopOf="@id/hardLevel"
         app:layout_constraintTop_toBottomOf="@id/easyLevel" />
 
     <com.google.android.material.button.MaterialButton
@@ -38,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:text="@string/play"
+        android:text="@string/hardLevel"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/normalLevel" />
 
 
