@@ -26,8 +26,15 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.acceptButton.setOnClickListener {
-
+            launchLevelChoosingFragment()
         }
+    }
+
+    private fun launchLevelChoosingFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fcvView, ChooseLevelFragment.newIntent())
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {
