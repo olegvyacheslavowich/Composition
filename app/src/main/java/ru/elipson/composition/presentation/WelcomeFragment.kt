@@ -33,7 +33,7 @@ class WelcomeFragment : Fragment() {
     private fun launchLevelChoosingFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fcvView, ChooseLevelFragment.newIntent())
-            .addToBackStack(null)
+            .addToBackStack("fragment_name")
             .commit()
     }
 

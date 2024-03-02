@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import ru.elipson.composition.R
 import ru.elipson.composition.databinding.FragmentGameBinding
+import ru.elipson.composition.domain.entity.GameResult
+import ru.elipson.composition.domain.entity.GameSettings
 import ru.elipson.composition.domain.entity.Level
 
 class GameFragment : Fragment() {
@@ -26,6 +29,11 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGameBinding.inflate(inflater)
+
+        binding.tvSum.setOnClickListener {
+            openGameFinishedFragment()
+        }
+
         return binding.root
     }
 
@@ -40,6 +48,13 @@ class GameFragment : Fragment() {
         } else {
             requireArguments().getParcelable(KEY_LEVEL)
         } ?: throw RuntimeException("Illegal parameter exception = $KEY_LEVEL")
+    }
+
+    private fun openGameFinishedFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fcvView, GameFinishedFragment.newInstance(GameResult(gameSetting = GameSettings())))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

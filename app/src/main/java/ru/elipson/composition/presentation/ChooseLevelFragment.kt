@@ -13,7 +13,7 @@ import ru.elipson.composition.domain.entity.Level
 class ChooseLevelFragment : Fragment() {
 
     private var _binding: FragmentChooseLevelBinding? = null
-    val binding get() = _binding ?: throw RuntimeException("ChooseLevelFragment = null")
+    private val binding get() = _binding ?: throw RuntimeException("ChooseLevelFragment = null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,20 +26,19 @@ class ChooseLevelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.testLevel.setOnClickListener {
-            openGameFragment(Level.Test)
-        }
-
-        binding.easyLevel.setOnClickListener {
-            openGameFragment(Level.Easy)
-        }
-
-        binding.normalLevel.setOnClickListener {
-            openGameFragment(Level.Normal)
-        }
-
-        binding.hardLevel.setOnClickListener {
-            openGameFragment(Level.Hard)
+        with(binding) {
+            testLevel.setOnClickListener {
+                openGameFragment(Level.Test)
+            }
+            easyLevel.setOnClickListener {
+                openGameFragment(Level.Easy)
+            }
+            normalLevel.setOnClickListener {
+                openGameFragment(Level.Normal)
+            }
+            hardLevel.setOnClickListener {
+                openGameFragment(Level.Hard)
+            }
         }
     }
 
@@ -51,7 +50,7 @@ class ChooseLevelFragment : Fragment() {
     private fun openGameFragment(level: Level) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fcvView, GameFragment.newInstance(level))
-            .addToBackStack(null)
+            .addToBackStack(GameFragment::class.java.simpleName)
             .commit()
     }
 
