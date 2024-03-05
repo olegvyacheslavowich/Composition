@@ -8,17 +8,17 @@ import kotlin.random.Random
 
 object GameRepositoryImpl : GameRepository {
     override fun generateQuestion(maxSumValue: Int, countOfOptions: Int): Question {
-        val sum = Random.nextInt(0, maxSumValue + 1)
-        val visibleNumber = sum - Random.nextInt(0, maxSumValue + 1)
-
-        val options = mutableListOf<Int>()
-        for (i in 0..sum) {
-            options.add(i)
+        val sum = Random.nextInt(2, maxSumValue + 1)
+        val visibleNumber = Random.nextInt(20 )
+        val options = HashSet<Int>()
+        val rightAnswer = sum - visibleNumber
+        options.add(rightAnswer)
+        val to = 10
+        while (options.size < countOfOptions) {
+            options.add(Random.nextInt(to))
         }
-
-        return Question(sum, visibleNumber, options)
+        return Question(sum, visibleNumber, options.toList())
     }
-
     override fun getGameSettings(level: Level): GameSettings =
         when (level) {
             is Level.Test -> GameSettings(5, 5, 50, 100)
