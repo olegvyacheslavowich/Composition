@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import ru.elipson.composition.R
 import ru.elipson.composition.databinding.FragmentGameBinding
 import ru.elipson.composition.domain.entity.GameResult
@@ -18,6 +21,7 @@ class GameFragment : Fragment() {
     private lateinit var level: Level
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding ?: throw RuntimeException("FragmentGameBinding = null")
+    private lateinit var viewModel: GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +32,17 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         _binding = FragmentGameBinding.inflate(inflater)
 
         binding.tvSum.setOnClickListener {
             openGameFinishedFragment()
+        }
+
+        viewModel.timeLiveData.observe(viewLifecycleOwner) {
+            with(binding) {
+                tvTimer.text = it.gameTimeInSec.toString()
+            }
         }
 
         return binding.root
@@ -52,7 +63,10 @@ class GameFragment : Fragment() {
 
     private fun openGameFinishedFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fcvView, GameFinishedFragment.newInstance(GameResult(gameSetting = GameSettings())))
+            .replace(
+                R.id.fcvView,
+                GameFinishedFragment.newInstance(GameResult(gameSetting = GameSettings()))
+            )
             .addToBackStack(null)
             .commit()
     }
