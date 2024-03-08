@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ru.elipson.composition.R
 import ru.elipson.composition.databinding.FragmentWelcomeBinding
 import java.lang.RuntimeException
@@ -31,10 +32,11 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun launchLevelChoosingFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
+        /*requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fcvView, ChooseLevelFragment.newIntent())
             .addToBackStack("fragment_name")
-            .commit()
+            .commit()*/
+        findNavController().navigate(R.id.action_welcomeFragment_to_chooseLevelFragment)
     }
 
     override fun onDestroyView() {

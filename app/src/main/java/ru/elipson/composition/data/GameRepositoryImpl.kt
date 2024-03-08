@@ -21,7 +21,7 @@ object GameRepositoryImpl : GameRepository {
     }
     override fun getGameSettings(level: Level): GameSettings =
         when (level) {
-            is Level.Test -> GameSettings(5, 5, 50, 100)
+            is Level.Test -> GameSettings(5, 5, 50, 2)
             Level.Easy -> GameSettings(5, 5, 50, 100)
             Level.Hard -> GameSettings(5, 5, 50, 100)
             Level.Normal -> GameSettings(5, 5, 50, 100)

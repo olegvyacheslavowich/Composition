@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import ru.elipson.composition.R
 import ru.elipson.composition.databinding.FragmentChooseLevelBinding
 import ru.elipson.composition.databinding.FragmentWelcomeBinding
@@ -48,15 +50,15 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun openGameFragment(level: Level) {
-        requireActivity().supportFragmentManager.beginTransaction()
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(
+                level
+            )
+        )
+        /*requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fcvView, GameFragment.newInstance(level))
             .addToBackStack(GameFragment::class.java.simpleName)
-            .commit()
+            .commit()*/
     }
 
-    companion object {
-
-        fun newIntent(): ChooseLevelFragment = ChooseLevelFragment()
-
-    }
 }
